@@ -13,12 +13,14 @@ def test_docdb_created():
     vpc_cidr = "10.254.192.0/24"
     network_stack = NetworkStack(cdk_app, "NetworkStack", vpc_cidr=vpc_cidr)
 
+    db_cluster_name = "test-docdb-v8"
     docdb_props = DocdbProps(
         instance_type=ec2.InstanceType.of(
             ec2.InstanceClass.MEMORY5, ec2.InstanceSize.LARGE
         ),
         master_username=master_username,
         port=port,
+        db_cluster_name=db_cluster_name,
     )
     docdb_stack = DocdbStack(
         scope=cdk_app,
@@ -46,6 +48,7 @@ def test_docdb_created():
     template.has_resource_properties(
         "AWS::DocDB::DBCluster",
         {
+            "DBClusterIdentifier": db_cluster_name,
             "EngineVersion": "8.0.0",
             "MasterUsername": master_username,
             "MasterUserPassword": assertions.Match.any_value(),

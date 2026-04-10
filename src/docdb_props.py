@@ -8,11 +8,17 @@ class DocdbProps:
     instance_type: What type of instance to start for the replicas
     master_username: The database admin account username
     port: The MongoDB port
+    db_cluster_name: Optional explicit cluster name
     """
 
     def __init__(
-        self, instance_type: ec2.InstanceType, master_username: str, port: int
+        self,
+        instance_type: ec2.InstanceType,
+        master_username: str,
+        port: int,
+        db_cluster_name: str,
     ) -> None:
         self.instance_type = instance_type
         self.master_username = master_username
         self.port = port
+        self.db_cluster_name = db_cluster_name

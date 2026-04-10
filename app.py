@@ -95,6 +95,7 @@ docdb_props = DocdbProps(
     ),
     master_username=docdb_master_username,
     port=mongodb_port,
+    db_cluster_name=f"model-ad-{environment}-docdb-v8",
 )
 docdb_stack = DocdbStack(
     scope=cdk_app,

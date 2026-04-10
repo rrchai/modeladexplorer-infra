@@ -55,6 +55,7 @@ class DocdbStack(cdk.Stack):
                 username=props.master_username,
                 password=self.master_password_secret.secret_value,
             ),
+            db_cluster_name=props.db_cluster_name,
             engine_version="8.0.0",
             instance_type=props.instance_type,
             vpc=vpc,
